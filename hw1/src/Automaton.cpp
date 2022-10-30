@@ -2,7 +2,7 @@
 // Created by az0t24 on 26.10.22.
 //
 
-#include "Automaton.h"
+#include "../include/Automaton.h"
 
 const State& Automaton::AddState(const std::string& name) {
     auto result = states_.insert(State(name));
@@ -24,6 +24,14 @@ void Automaton::DeleteTransition(State& state, const Transition& transition) {
 
 std::set<State>& Automaton::GetStates() {
     return states_;
+}
+
+const std::set<char>& Automaton::GetAlphabet() const {
+    return alphabet_;
+}
+
+const std::string& Automaton::GetStart() const {
+    return start_;
 }
 
 void Automaton::DeleteEpsTransitions() {

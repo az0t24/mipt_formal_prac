@@ -2,7 +2,7 @@
 // Created by az0t24 on 26.10.22.
 //
 
-#include "State.h"
+#include "../include/State.h"
 
 State::State(std::string name) {
     name_ = name;

@@ -35,6 +35,8 @@ public:
     void AddTransition(const State& from, const Transition& transition);
 
     std::set<State>& GetStates();
+    const std::set<char>& GetAlphabet() const;
+    const std::string& GetStart() const;
 
     Automaton GetDFA();
     Automaton GetCompleteDFA();
@@ -44,22 +46,11 @@ public:
 
 private:
     std::string start_;
-    std::set<char> alphabet_{'a', 'b'};
+    std::set<char> alphabet_;
     std::set<State> states_;
 
     void DeleteState(const State& state);
     void DeleteTransition(State& state, const Transition& transition);
-
-    // TODO
-    void Print() {
-        for (auto state : states_) {
-            std::cout << state.GetName() << ' ' << (state.IsTerm() ? "terminal" : "not terminal") << std::endl;
-            for (auto& trans : state.GetTransFrom()) {
-                std::cout << trans.GetLetter() << ' ' << trans.GetTo().GetName() << std::endl;
-            }
-        }
-        std::cout << "/////////////////////////" << std::endl;
-    }
 
     void DeleteNotReachable();
     std::map<std::pair<std::string, char>, std::set<State>> GetReversedTransition();

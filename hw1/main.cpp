@@ -1,6 +1,6 @@
 #include <string>
-#include "State.h"
-#include "Automaton.h"
+#include "include/State.h"
+#include "include/Automaton.h"
 
 void add(Automaton& a, std::string first, std::string second, char letter) {
     const State& from = a.AddState(first);
@@ -32,69 +32,19 @@ void test1_a(Automaton& test2) {
     mark_term(test2, "9");
 }
 
-void test_eps(Automaton& a) {
-    add(a, "1", "2", '0');
-    add(a, "2", "3", 'b');
-    add(a, "2", "3", '0');
-    add(a, "3", "4", 'a');
-    mark_term(a, "2");
-}
-
-void test_1(Automaton& a) {
-    add(a, "1", "2", 'b');
-    add(a, "2", "1", '0');
-    add(a, "2", "3", 'b');
-    add(a, "3", "6", 'a');
-    add(a, "2", "4", 'a');
-    add(a, "4", "5", 'a');
-    add(a, "5", "4", 'b');
-    add(a, "4", "6", 'b');
-    add(a, "6", "2", '0');
-    mark_term(a, "1");
-    mark_term(a, "2");
-}
-
-void test_1_2(Automaton& a) {
-    add(a, "1", "2", 'b');
-    add(a, "2", "1", '0');
+void test_3(Automaton& a) {
+    add(a, "1", "2", 'a');
     add(a, "2", "3", 'b');
     add(a, "3", "2", '0');
-//    add(a, "2", "4", 'a');
-    mark_term(a, "1");
+    add(a, "2", "4", '0');
+    add(a, "4", "5", 'a');
+    add(a, "5", "6", 'b');
+    add(a, "6", "4", 'a');
+    add(a, "4", "7", 'a');
+    add(a, "7", "8", 'a');
+    add(a, "8", "7", 'b');
+    add(a, "7", "2", 'a');
     mark_term(a, "2");
-}
-
-void test_2(Automaton& a) {
-    add(a, "1", "2", '0');
-    add(a, "1", "5", '0');
-    add(a, "2", "4", 'a');
-    add(a, "2", "3", 'a');
-    add(a, "3", "2", 'b');
-    add(a, "4", "4", 'a');
-    add(a, "5", "6", 'b');
-    add(a, "5", "6", 'a');
-    add(a, "6", "5", 'b');
-    add(a, "6", "7", 'a');
-    add(a, "7", "5", 'b');
-    mark_term(a, "5");
-    mark_term(a, "4");
-}
-
-void test_min(Automaton& a) {
-    add(a, "1", "1", 'a');
-    add(a, "1", "1", 'b');
-    add(a, "1", "2", 'b');
-    add(a, "2", "3", 'b');
-    add(a, "2", "5", 'a');
-    add(a, "5", "6", 'b');
-    add(a, "3", "3", 'a');
-    add(a, "3", "3", 'b');
-    add(a, "3", "4", 'a');
-    add(a, "4", "6", 'a');
-    add(a, "6", "6", 'b');
-    add(a, "6", "7", 'b');
-    add(a, "7", "7", 'a');
-    mark_term(a, "7");
 }
 
 int main(int argc, char** argv) {
@@ -106,8 +56,7 @@ int main(int argc, char** argv) {
 
     Automaton test2({'a', 'b'}, "1");
 
-    test_min(test2);
-
+    test_3(test2);
 
     auto dfa = test2.GetDFA();
     auto complete_dfa = dfa.GetCompleteDFA();
