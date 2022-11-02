@@ -93,41 +93,6 @@ Automaton::Automaton(std::ifstream &in) {
     for (auto elem : terminal) {
         const_cast<State&>(*states_.find(State(elem))).MakeTerminal();
     }
-
-//    State: 1
-//        -> a 1
-//            -> b 1_2
-//    State: 1_2
-//        -> a 1_5
-//            -> b 1_2_3
-//    State: 1_2_3
-//        -> a 1_3_4_5
-//            -> b 1_2_3
-//    State: 1_2_3_6
-//        -> a 1_3_4_5
-//            -> b 1_2_3_6_7
-//    State: 1_2_3_6_7
-//        -> a 1_3_4_5_7
-//            -> b 1_2_3_6_7
-//    State: 1_2_6
-//        -> a 1_5
-//            -> b 1_2_3_6_7
-//    State: 1_3_4_5
-//        -> a 1_3_4_6
-//            -> b 1_2_3_6
-//    State: 1_3_4_5_7
-//        -> a 1_3_4_6_7
-//            -> b 1_2_3_6
-//    State: 1_3_4_6
-//        -> a 1_3_4_6
-//            -> b 1_2_3_6_7
-//    State: 1_3_4_6_7
-//        -> a 1_3_4_6_7
-//            -> b 1_2_3_6_7
-//    State: 1_5
-//        -> a 1
-//            -> b 1_2_6
-//            --END--
 }
 
 const State& Automaton::AddState(const std::string& name) {
