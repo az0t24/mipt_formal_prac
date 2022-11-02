@@ -26,5 +26,5 @@ the result in output file):
 
 5. To get `coverage-report` use:
 ```
-    ./get
+    ./get_coverage.sh
 ```
