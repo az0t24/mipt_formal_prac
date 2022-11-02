@@ -4,6 +4,132 @@
 
 #include "../include/Automaton.h"
 
+Automaton::Automaton(const std::set<char>& alphabet, const std::string& start) : start_(start), alphabet_(alphabet) {
+}
+
+Automaton::Automaton(const std::set<char>& alphabet, const std::string& start, const std::set<std::string>& input)
+        : start_(start), alphabet_(alphabet) {
+    for (auto& i : input) {
+        states_.insert(State(i));
+    }
+}
+
+Automaton::Automaton(std::ifstream &in) {
+    alphabet_ = {'a', 'b'};
+
+    std::string data;
+
+//    DOA: v1
+    std::getline(in, data);
+//    Start: 1
+    std::getline(in, data, ' ');
+    std::getline(in, data);
+    start_ = data;
+
+//    Acceptance: 1_2_3_6_7 & 1_3_4_5_7 & 1_3_4_6_7
+    std::getline(in, data, ' ');
+    std::getline(in, data);
+    std::stringstream ss(data);
+    std::set<std::string> terminal;
+    std::string state;
+
+    while (ss >> state) {
+        if (state == "&") {
+            ss.ignore();
+            continue;
+        }
+        terminal.insert(state);
+        if (ss.peek() == ' ') {
+            ss.ignore();
+        }
+    }
+
+//        --BEGIN--
+    std::getline(in, data);
+
+    while (std::getline(in, data, '\n')) {
+        // State or -> or --END--
+        std::string tmp;
+        std::stringstream new_line(data);
+
+        new_line >> tmp;
+        if (tmp == "State:") {
+            new_line.ignore();
+            new_line >> state;
+
+            if (!states_.contains(State(state))) {
+                states_.insert(State(state));
+            }
+        } else if (tmp == "->") {
+            new_line.ignore();
+
+            std::string symbol;
+            new_line >> symbol;
+
+            new_line.ignore();
+
+            std::string state_to;
+            new_line >> state_to;
+
+            if (!states_.contains(State(state_to))) {
+                states_.insert(State(state_to));
+            }
+
+            auto& from = *states_.find(State(state));
+            auto& to = *states_.find(State(state_to));
+
+            char letter = symbol[0];
+            if (symbol == "EPS") {
+                letter = '0';
+            }
+
+            Transition trans(letter, to);
+            const_cast<State&>(from).AddTransition(trans);
+        } else {
+            continue;
+        }
+    }
+
+    for (auto elem : terminal) {
+        const_cast<State&>(*states_.find(State(elem))).MakeTerminal();
+    }
+
+//    State: 1
+//        -> a 1
+//            -> b 1_2
+//    State: 1_2
+//        -> a 1_5
+//            -> b 1_2_3
+//    State: 1_2_3
+//        -> a 1_3_4_5
+//            -> b 1_2_3
+//    State: 1_2_3_6
+//        -> a 1_3_4_5
+//            -> b 1_2_3_6_7
+//    State: 1_2_3_6_7
+//        -> a 1_3_4_5_7
+//            -> b 1_2_3_6_7
+//    State: 1_2_6
+//        -> a 1_5
+//            -> b 1_2_3_6_7
+//    State: 1_3_4_5
+//        -> a 1_3_4_6
+//            -> b 1_2_3_6
+//    State: 1_3_4_5_7
+//        -> a 1_3_4_6_7
+//            -> b 1_2_3_6
+//    State: 1_3_4_6
+//        -> a 1_3_4_6
+//            -> b 1_2_3_6_7
+//    State: 1_3_4_6_7
+//        -> a 1_3_4_6_7
+//            -> b 1_2_3_6_7
+//    State: 1_5
+//        -> a 1
+//            -> b 1_2_6
+//            --END--
+}
+
 const State& Automaton::AddState(const std::string& name) {
     auto result = states_.insert(State(name));
     return *result.first;
@@ -350,6 +476,7 @@ Automaton Automaton::GetMinimizedCDFA() {
 
     return minimized;
 }
+
 std::map<std::pair<std::string, char>, std::set<State>> Automaton::GetReversedTransition() {
     std::map<std::pair<std::string, char>, std::set<State>> result;
 

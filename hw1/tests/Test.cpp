@@ -139,7 +139,7 @@ TEST_F(AutomatonTest, ConstructDFA1) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "DFA1_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/DFA1_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructDFA2) {
@@ -153,7 +153,7 @@ TEST_F(AutomatonTest, ConstructDFA2) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "DFA2_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/DFA2_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructDFA3) {
@@ -167,7 +167,7 @@ TEST_F(AutomatonTest, ConstructDFA3) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "DFA3_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/DFA3_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructCDFA1) {
@@ -181,7 +181,7 @@ TEST_F(AutomatonTest, ConstructCDFA1) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "CDFA1_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/CDFA1_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructCDFA2) {
@@ -195,7 +195,7 @@ TEST_F(AutomatonTest, ConstructCDFA2) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "CDFA2_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/CDFA2_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructCDFA3) {
@@ -209,7 +209,7 @@ TEST_F(AutomatonTest, ConstructCDFA3) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "CDFA3_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/CDFA3_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructMCDFA1) {
@@ -223,7 +223,7 @@ TEST_F(AutomatonTest, ConstructMCDFA1) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "MCDFA1_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/MCDFA1_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructMCDFA2) {
@@ -237,7 +237,7 @@ TEST_F(AutomatonTest, ConstructMCDFA2) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "MCDFA2_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/MCDFA2_right.doa"));
 }
 
 TEST_F(AutomatonTest, ConstructMCDFA3) {
@@ -251,5 +251,5 @@ TEST_F(AutomatonTest, ConstructMCDFA3) {
     a.PrintToDoa(out);
     out.close();
 
-    ASSERT_TRUE(compare_doa("DFA_test.doa", "MCDFA3_right.doa"));
+    ASSERT_TRUE(compare_doa("DFA_test.doa", "right_auto/MCDFA3_right.doa"));
 }

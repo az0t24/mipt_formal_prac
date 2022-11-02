@@ -20,14 +20,9 @@
 
 class Automaton {
 public:
-    explicit Automaton(const std::set<char>& alphabet, const std::string& start) : start_(start), alphabet_(alphabet) {
-    }
-    explicit Automaton(const std::set<char>& alphabet, const std::string& start, const std::set<std::string>& input)
-        : start_(start), alphabet_(alphabet) {
-        for (auto& i : input) {
-            states_.insert(State(i));
-        }
-    }
+    explicit Automaton(const std::set<char>& alphabet, const std::string& start);
+    explicit Automaton(const std::set<char>& alphabet, const std::string& start, const std::set<std::string>& input);
+    explicit Automaton(std::ifstream& in);
     ~Automaton() = default;
 
     const State& AddState(const std::string& name);
