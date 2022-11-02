@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/az0t24/mipt-formal/mipt_formal_prac Select CMakeLists.txt
