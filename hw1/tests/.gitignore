@@ -1,0 +1,5 @@
+googletest
+AutoTest.cpp
+AutoTest.h
+build
+.gitignore
