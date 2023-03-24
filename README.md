@@ -1,1 +1,0 @@
-# mipt_formal_prac
