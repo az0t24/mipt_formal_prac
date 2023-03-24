@@ -1,0 +1,7 @@
+cmake-build-debug/
+build/
+.clang-format
+.clang-tidy
+.idea
+.gitignore
+cmake
